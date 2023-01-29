@@ -1,12 +1,6 @@
-use std::fs;
-use std::path::PathBuf;
-
-fn vcr_init() {
-    // let srcdir = PathBuf::from("./vcrust");
-
-    fs::create_dir("./.vcrust").expect("Reinitialized existing VCRust repository");
-}
+mod vcr_init;
+use vcr_init::init;
 
 fn main() {
-    vcr_init();
+    init::create_repository();
 }
