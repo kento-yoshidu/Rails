@@ -1,5 +1,5 @@
 [package]
-name = "rustgit"
+name = "vcrust"
 version = "0.1.0"
 edition = "2021"
 

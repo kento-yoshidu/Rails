@@ -302,17 +302,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3582f63211428f83597b51b2ddb88e2a91a9d52d12831f9d08f5e624e8977422"
 
 [[package]]
-name = "rustgit"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "hex",
- "libflate",
- "serde",
- "sha-1",
-]
-
-[[package]]
 name = "scratch"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -399,6 +388,17 @@ name = "unicode-width"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c0edd1e5b14653f783770bce4a4dabb4a5108a5370a5f5d8cfe8710c361f6c8b"
+
+[[package]]
+name = "vcrust"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "hex",
+ "libflate",
+ "serde",
+ "sha-1",
+]
 
 [[package]]
 name = "version_check"
