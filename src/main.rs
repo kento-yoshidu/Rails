@@ -1,21 +1,18 @@
-mod vcr_init;
-mod object;
-
-use vcr_init::init;
-use object::blob;
-
 use std::io;
 
-// 構造体のインポート
+mod cmd;
+mod object;
+
+use cmd::{init, add};
+use object::{git_object, blob};
+
 use blob::Blob;
 
 fn main() -> Result<(), String> {
     let args: Vec<String> = std::env::args().collect();
     let cmd = args.get(1).unwrap().clone();
 
-    let blob = Blob::new(String::from("123456789"));
-
-    println!("{:?}", Blob::as_bytes(&blob));
+    git_object::test();
 
     match cmd.as_str() {
         "init" => {
