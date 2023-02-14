@@ -1,18 +1,42 @@
+use std::io;
 use std::fs;
 use std::io::Write;
 
-pub fn create_repository() {
-    fs::create_dir("./.vcrust").expect("Reinitialized existing VCrust repository ❌");
+pub fn create_repository() -> Result<(), String> {
+    match fs::create_dir("./.vcrust") {
+        Ok(_) => {}
+        Err(_) => {
+            return Err("❌ Reinitialized existing VCRust repository.".to_string());
+        }
+    }
 
-    fs::create_dir("./.vcrust/refs").expect("Failed to create directory: .vcrust/refs ❌");
+    match fs::create_dir("./.vcrust/refs") {
+        Ok(_) => {}
+        Err(_) => {
+            fs::remove_dir_all(".vcrust");
+            return Err("❌ Failed to create directory: .vcrust/refs.".to_string());
+        }
+    }
+    
+    match fs::File::create("./.vcrust/refs/main") {
+        Ok(_) => {}
+        Err(_) => {
+            fs::remove_dir_all(".vcrust");
+            return Err("❌ Failed to create file: .vcrust/refs/main ❌".to_string());
+        }
+    }
 
-    fs::File::create("./.vcrust/refs/main").expect("Failed to create file: .vcrust/refs/main ❌");
-
-    fs::File::create("./.vcrust/index").expect("Failed to create file: .vcrust/index ❌");
+    match fs::File::create("./.vcrust/index") {
+        Ok(_) => {}
+        Err(_) => {
+            fs::remove_dir_all(".vcrust");
+            return Err("❌ Failed to create file: .vcrust/index".to_string());
+        }
+    }
 
     let mut head = fs::File::create("./.vcrust/HEAD").expect("Failed to create file: .vcrust/HEAD ❌");
 
     head.write_all(b"ref: refs/heads/main").unwrap();
 
-    println!("Initialized empty Git repository 🎉");
+    return Ok(());
 }
