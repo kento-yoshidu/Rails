@@ -1,5 +1,6 @@
 use std::env;
 use sha1::{Sha1, Digest};
+use std::path::PathBuf;
 
 /*
 use std::fs;
@@ -24,12 +25,25 @@ fn main() {
     println!("{:x}", blob_object);
     //=> 5e1c309dae7f45e0f39b1bf3ac3cd9db12e7d689
 
-    let abs_path = env::current_dir();
+    let mut path = PathBuf::new();
 
-    match abs_path {
-        Ok(ok) => println!("{}", ok.display()),
-        Err(err) => println!("{}", err)
-    };
+    path.push(env::current_dir().expect("絶対パスの取得"));
+
+    println!("{}", path);
+
+    path.push("text.txt");
+
+    println!("{}", path.display());
+
+    /*
+    let abs_path = env::current_dir()?;
+
+    let file = PathBuf::from("text.txt");
+
+    println!("{}", file.display());
+
+    Ok(())
+    */
 
     /*
     let args: Vec<String> = std::env::args().collect();

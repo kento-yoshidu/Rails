@@ -56,5 +56,36 @@ fn main() {
         Err(err) => println!("{}", err)
     };
 }
+```
 
+パスが取得できていることを確認出来たら、`?`でエラー委譲しておく。
 
+```rust
+fn main() -> std::io::Result<()> {
+    // ...
+
+    let abs_path = env::current_dir()?;
+}
+```
+
+`std::path::Path`はファイルやディレクトリのパス情報を扱うのに便利。これのいわばmutable版である`std::path::PathBuf`を使ってみる。
+
+`push`を使用することでパスを追加していくことができる。
+
+```rust
+// main.rs
+
+fn main() -> std::io::Result<()> {
+    // ...
+
+    let file = PathBuf::from("text.txt");
+
+    println!("{}", file.display());
+
+    Ok(())
+}
+```
+
+[ファイルやディレクトリのパス文字列を構築／分割する (std::path::Path, PathBuf) - まくまく Rust ノート](https://maku77.github.io/p/36hr2bj/)
+
+[How to Fix `T` doesn't implement std:fmt:Display in Rust? - Become A Better Programmer](https://www.becomebetterprogrammer.com/rust-fix-doesnt-implement-std-fmt-display/)
